@@ -4,11 +4,11 @@ class Solution {
         for (i in nums.indices) {
             if (nums[i] != 0) {
                 nums[lastNonZeroFoundAt] = nums[i]
+                if(lastNonZeroFoundAt != i){
+                   nums[i] = 0
+                }
                 lastNonZeroFoundAt++
             }
-        }
-        for (i in lastNonZeroFoundAt until nums.size) {
-            nums[i] = 0
         }
         return nums
     }
