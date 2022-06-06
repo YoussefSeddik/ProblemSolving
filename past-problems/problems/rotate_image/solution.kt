@@ -1,19 +1,25 @@
 class Solution {
     fun rotate(matrix: Array<IntArray>): Unit {
-        val n = matrix[0].size-1
-        for (i in 0..n) {
-            for (j in i..n) {
-                val temp = matrix[i][j]
-                matrix[i][j] = matrix[j][i]
-                matrix[j][i] = temp
+        val rowsIndices = matrix.size - 1
+        val columnsIndices = matrix[0].size - 1
+        for(i in 0..(rowsIndices - 1)/2){
+            for(j in 0..(columnsIndices)/2){
+                swapeMyMatrix(matrix,arrayOf<Int>(i,j),arrayOf<Int>(i,j),columnsIndices)
             }
         }
-        for (i in 0..n) {
-            for (j in 0..n / 2) {
-                val temp = matrix[i][j]
-                matrix[i][j] = matrix[i][n-j]
-                matrix[i][n-j] = temp
-            }
+    }
+    
+    fun swapeMyMatrix(matrix: Array<IntArray>, origional:Array<Int>, current:Array<Int>, columnsIndx: Int){
+        var newColIndex = columnsIndx - current[0]
+        val newPos = arrayOf<Int>(current[1],newColIndex)
+        if(origional[0] == newPos[0] && origional[1] == newPos[1]){
+            val temp = matrix[current[0]][current[1]]
+            matrix[newPos[0]][newPos[1]] = temp
+            return
         }
+        val temp = matrix[current[0]][current[1]]
+        swapeMyMatrix(matrix,origional,newPos,columnsIndx)
+        matrix[newPos[0]][newPos[1]] = temp
+        
     }
 }
