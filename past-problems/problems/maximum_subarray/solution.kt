@@ -1,14 +1,14 @@
 class Solution {
     fun maxSubArray(nums: IntArray): Int {
-        var max = Integer.MIN_VALUE;
-        var sum = 0
-        for(i in 0 .. nums.size-1){
-            sum += nums[i]
-            max = Math.max(sum,max)
-            if(sum < 0){
-                sum = 0
+        var curSum = 0
+        var maxSum = nums[0]
+        for(i in 0..nums.size-1){
+            if (curSum < 0) {
+                curSum = 0
             }
+            curSum += nums[i]
+            maxSum = Math.max(maxSum, curSum)
         }
-        return max
+        return maxSum
     }
 }
